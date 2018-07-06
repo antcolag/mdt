@@ -1,0 +1,62 @@
+pluggin che sfrutti le api di msx per ottenere
+- la lista delle categorie					https://webservice.msx-international.com/?action=listcategories&BP=xxx&usern=yyy&passwd=zz
+- i prodotti di una determinata categoria	https://webservice.msx-international.com/?action=productsbycategoryid&categoryId=VBDES&BP=xxx&usern=yyy&passwd=zz
+- informazioni su un ordine					https://webservice.msx-international.com/?action=getorder&docnum=wwww&BP=xxx&usern=yyy&passwd=zz
+- inviare un ordine							https://webservice.msx-international.com/?action=addorder&BP=xxx&usern=yyy&passwd=zz
+? ottenre un immagine di un prodotto		xxx https://webservice.msx-international.com/?action=getimage&id=10050 [ &thumb=n ] xxx
+
+permetta di caricare in woocommerce i prodotti e le le categoriedi msx
+
+quando viene effettuato un ordine in woocommerce, l'ordine deve essere accettato da msx prima di poter essere concluso
+
+
+Il mio plugin dovrà rispondere a api in vari formati
+quindi potrebbe essere utile sviluppare una classe che presenti queste api
+e una classe che stampi le risposte
+il pluggin dovrebbe accettare/risponedere a api json
+
+
+nella pagina di edit di un prodotto ci si deve mettere un riquadro che ti permetta di compiere azioni su quel prodotto,
+non posso essere operazioni asincrone perché senno tu agggiorni e non lo vedi
+
+
+
+plugin{
+	MsxCategoria[]	listCategories();
+	MsxProdotto[]	productsByCategoryId( String categoryId )
+	MsxOrder		getOrder( String docnum )
+	MsxOrder		addOrder();
+	
+ /* ???				getImage(String id, thumb); */
+ 
+}
+
+
+
+
+
+MsxCategoria{
+	void saveInWoocommerce()
+	woocommercecategory getFromWoocommerce()
+	productList();
+	...
+}
+
+MsxProdotto{
+	void saveInWoocommerce()
+	woocommerceproduct getFromWoocommerce()
+	...
+}
+
+MsxOrder{
+	void getOrder( String docnum )
+	MsxOrder addOrder()
+	...
+}
+
+
+MsxError {
+	...
+}
+
+

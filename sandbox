@@ -1,0 +1,15 @@
+#!/bin/bash
+
+help(){
+	echo -e "cof";
+}
+help
+COUNTER=1
+while [  $COUNTER -ne 0 ]; do
+	./cli_api.php
+	
+	let COUNTER=$?
+	if [[ $COUNTER == 2 ]]; then
+		help;
+	fi
+done
